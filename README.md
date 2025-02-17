@@ -1,7 +1,7 @@
 # Salarycalc
 
 flowchart:
-
+https://github.com/SaintMil0/Salarycalc/blob/main/flowchartCalc.drawio.png
 
 challenges: Challenges included differentiating setter methods vs. constructor overloading, updating tables correctly, handling input loops, ensuring correct tax calculation, and debugging.
 

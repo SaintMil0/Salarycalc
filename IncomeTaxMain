@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class IncomeTaxMain {
+    public static int getInteger(Scanner input, String prompt) {
+        int inputValue;
+
+        System.out.println(prompt + ": ");
+        inputValue = input.nextInt();
+
+        return inputValue;
+    }
+
+    public static void main(String[] args) {
+        final String PROMPT_SALARY = "\nEnter annual salary (-1 to exit)";
+        Scanner scnr = new Scanner(System.in);
+        int annualSalary;
+        double taxRate;
+        int taxToPay;
+
+        // Original tax tables
+        int[] salary = {0, 20000, 50000, 100000, Integer.MAX_VALUE};
+        double[] taxTable = {0.0, 0.10, 0.20, 0.30, 0.40};
+
+        System.out.println("Task A - Using setter method:");
+        // Create object and use setter method
+        TaxTableTools table = new TaxTableTools();
+        table.setTables(salary, taxTable);
+
+        // Process salaries for Task A
+        annualSalary = getInteger(scnr, PROMPT_SALARY);
+        while (annualSalary >= 0) {
+            taxRate = table.getValue(annualSalary);
+            taxToPay = (int)(annualSalary * taxRate);
+            System.out.println("Annual Salary: " + annualSalary +
+                    "\tTax rate: " + taxRate +
+                    "\tTax to pay: " + taxToPay);
+            annualSalary = getInteger(scnr, PROMPT_SALARY);
+        }
+
+        System.out.println("\nTask B - Using constructor overload with modified tables:");
+        // Modified tax tables for Task B
+        int[] newSalary = {0, 30000, 60000, 90000, Integer.MAX_VALUE};
+        double[] newTaxTable = {0.0, 0.15, 0.25, 0.35, 0.45};
+
+        // Create new object using overloaded constructor
+        TaxTableTools tableNew = new TaxTableTools(newSalary, newTaxTable);
+
+        // Process salaries for Task B
+        annualSalary = getInteger(scnr, PROMPT_SALARY);
+        while (annualSalary >= 0) {
+            taxRate = tableNew.getValue(annualSalary);
+            taxToPay = (int)(annualSalary * taxRate);
+            System.out.println("Annual Salary: " + annualSalary +
+                    "\tTax rate: " + taxRate +
+                    "\tTax to pay: " + taxToPay);
+            annualSalary = getInteger(scnr, PROMPT_SALARY);
+        }
+    }
+}
